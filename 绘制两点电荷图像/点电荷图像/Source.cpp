@@ -6,6 +6,7 @@
 const double COULOMB_CONSTANT = 8987551787.3681764; // 库仑常数
 const double POINT_CHARGE_RADIUS = 10.0; // 电荷半径
 const double LINE_LENGTH = 100.0; // 场线长度
+const double M_PI = 3.1415926;  // Π常数
 
 // 函数声明
 double distance(double x1, double y1, double x2, double y2);
@@ -31,6 +32,7 @@ public:
 private:
     double x, y;
 };
+
 
 int main() {
     // 创建窗口
@@ -89,8 +91,7 @@ int main() {
                 }
 
                 double length = std::sqrt(fx * fx + fy * fy);
-                if (length > 0.0)
-                {
+                if (length > 0.0) {
                     // 画场向量
                     sf::VertexArray line(sf::Lines, 2);
                     line[0].position = sf::Vector2f(x, y);
@@ -117,4 +118,16 @@ int main() {
         window.display();
     }
 
+
     return 0;
+}
+// 计算两点之间的距离
+double distance(double x1, double y1, double x2, double y2) {
+    double dx = x1 - x2;
+    double dy = y1 - y2;
+    return std::sqrt(dx * dx + dy * dy);
+}
+// 计算库仑力
+double coulomb_force(double q1, double q2, double r) {
+    return COULOMB_CONSTANT * q1 * q2 / (r * r);
+}
